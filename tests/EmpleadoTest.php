@@ -20,5 +20,22 @@ abstract class EmpleadoTest extends \PHPUnit\Framework\TestCase {
         $this->expectException(\Exception::class);
         $r = $this->crear("Matias" , "");
     }
+    public function testArrojaDNI()
+    {
+        $r = $this->crear(42482377);
+        $this->assertEquals(42482377, $r->getDNI());
+    }
+
+    public function testNoArrojaDNISiEstaVacio()
+    {
+        $this->expectException(\Exception::class);
+        $r = $this->crear("Fulano", "de tal", null, 9999);
+    }
+
+    public function testNoArrojaDNISiHayUnaLetra()
+    {
+        $this->expectException(\Exception::class);
+        $r = $this->crear("Fulano", "de tal", "a", 9999);
+    }
     
 }
