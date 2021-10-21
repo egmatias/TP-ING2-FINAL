@@ -47,4 +47,20 @@ class EmpleadoPermanenteTest extends EmpleadoTest {
        $this->assertEquals("0%", $r->calcularComision());
      }
 
+       public function testCalculaAntiguedadConFechaFutura()
+     {
+       //Se espera una excepcion al ingresar una fecha en futuro
+        $this->expectException(\Exception::class);
+        $fechaIngreso = new DateTime('2023-10-15');
+        $r = $this->crear("Jose", "Ab", 42214, 100, $fechaIngreso);
+        $fechaActual = new DateTime();
+        $antiguedad = $fechaActual->diff($fechaIngreso);
+     }
+
+       public function testCalcularIngresoTotal() 
+     {
+        $antiguedad = 20;
+        $r = $this->crear("Jose", "Ab", 42214, 100 + $antiguedad);
+        $this->assertEquals(120, $r->calcularIngresoTotal());
+     }
  }
