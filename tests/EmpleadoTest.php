@@ -49,5 +49,25 @@ abstract class EmpleadoTest extends \PHPUnit\Framework\TestCase {
         $this->expectException(\Exception::class);
         $r = $this->crear("Fulano", "de tal", 9999, null);
     }
+    
+    public function testObtieneYSeleccionaSector() 
+    {
+    $s = $this->crear("Fulano", "de tal", 9999, 1000, null);
+    $s->setSector("Permanente");
+    $this->assertEquals("Permanente",$s->getSector()); 
+    }
+    
+    public function testNoSeleccionaSector() 
+    {
+    $s = $this->crear("Fulano", "de tal", 9999, 1000, null);
+    $this->assertEquals("No especificado",$s->getSector()); 
+    }
 
+    public function test__toString()
+    {
+      $r = $this->crear("Fulano", "de tal", 1234, 9999);
+      $this->assertEquals("Fulano de tal 1234 9999", $r->__toString());
+    }   
 }
+
+
