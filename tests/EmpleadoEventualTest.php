@@ -18,4 +18,17 @@ class EmpleadoEventualTest extends EmpleadoTest {
         $this->assertEquals(12.5, $r->calcularComision());
 
     }
+    public function testCalculaComisionConMontoCeroONegativo()
+
+    {   $this->expectException(\Exception::class);
+        $r= $this->crear("Jose", "Perez", 41065923, 1000, null, [0,-200, 300, 400]);
+
+    }
+
+    public function testCalculaIngresoTotal()
+    {
+       $r= $this->crear("Juan" , "asb", 424242, 1000);
+        $this->assertEquals(1012.5, $r->calcularIngresoTotal());
+       
+    }
 }
