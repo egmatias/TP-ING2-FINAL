@@ -26,4 +26,25 @@ class EmpleadoPermanenteTest extends EmpleadoTest {
          $antiguedad = $fechaActual->diff($fechaIngreso);
         $this->assertEquals($antiguedad->y, $r->calcularAntiguedad());
      }
+     public function testCalculaComision() {
+        //Mismo que el anterior y ademas se verifica que el porcentaje de antiguedad sea = a calcularComision()
+        $fechaIngreso = new DateTime('2001-10-15');
+        $r = $this->crear("Jose", "Ab", 42214, 100, $fechaIngreso);
+        $fechaActual = new DateTime();
+        $antiguedad = $fechaActual->diff($fechaIngreso);
+        $this->assertEquals($antiguedad->y, $r->calcularAntiguedad());
+        $this->assertEquals("{$antiguedad->y}%", $r->calcularComision());
+
+     }
+       public function testCalculaAntiguedadConDia0()
+     {
+       //Calcula la antiguedad pasando dos fechas iguales
+       $fechaIngreso = new DateTime();
+       $r = $this->crear("Jose", "Ab", 42214, 100, $fechaIngreso);
+       $fechaActual = new DateTime();
+       $antiguedad = $fechaActual->diff($fechaIngreso);
+       $this->assertEquals($antiguedad->y, $r->calcularAntiguedad());
+       $this->assertEquals("0%", $r->calcularComision());
+     }
+
  }
