@@ -38,4 +38,16 @@ abstract class EmpleadoTest extends \PHPUnit\Framework\TestCase {
         $r = $this->crear("Fulano", "de tal", "a", 9999);
     }
     
+    public function testArrojaSalario()
+    {
+        $r = $this->crear(1000);
+        $this->assertEquals(1000, $r->getSalario());
+    }
+
+    public function testNoArrojaSalario()
+    {
+        $this->expectException(\Exception::class);
+        $r = $this->crear("Fulano", "de tal", 9999, null);
+    }
+
 }
